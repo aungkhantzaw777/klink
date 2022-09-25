@@ -1,16 +1,9 @@
 import React from 'react'
+import { ProductProp as product } from '../../utils/interface/root';
 export type Props = {
     product: product
 };
-interface product {
-    id: number,
-    name: string,
-    href: string,
-    price: string,
-    quantity: number,
-    imageSrc: string,
-    imageAlt: string,
-}
+
 export const CardList: React.FC<Props> = ({ product }) => (
     <>
         <li className="flex py-6">

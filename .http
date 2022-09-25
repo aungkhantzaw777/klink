@@ -1,0 +1,64 @@
+POST http://localhost:8000/api/auth/register HTTP/1.1
+content-type: application/json
+Accept: application/json
+
+{
+    "name": "AungKhant",
+    "email": "aungkhantzaw133@gmail.com",
+    "password": "pass123"
+}
+
+###
+POST http://localhost:8000/api/auth/login HTTP/1.1
+content-type: application/json
+Accept: application/json
+
+{
+    "email": "aungkhantzaw133@gmail.com",
+    "password": "pass123"
+}
+
+
+###
+GET http://localhost:8000/api/categories HTTP/1.1
+content-type: application/json
+Accept: application/json
+Authorization: Bearer 4|aBumpYkcDA8Sl1QoA671RBIG4CRFqU4yCOsQGOGA
+
+###
+GET http://localhost:8000/api/category/15 HTTP/1.1
+content-type: application/json
+Accept: application/json
+Authorization: Bearer 4|aBumpYkcDA8Sl1QoA671RBIG4CRFqU4yCOsQGOGA
+
+###
+GET http://localhost:8000/api/category/15 HTTP/1.1
+content-type: application/json
+Accept: application/json
+Authorization: Bearer 4|aBumpYkcDA8Sl1QoA671RBIG4CRFqU4yCOsQGOGA
+
+###
+POST http://localhost:8000/api/category HTTP/1.1
+content-type: application/json
+Accept: application/json
+Authorization: Bearer 4|aBumpYkcDA8Sl1QoA671RBIG4CRFqU4yCOsQGOGA
+
+{
+    "name" : "tesas"
+}
+### update cat
+PATCH http://localhost:8000/api/category/24 HTTP/1.1
+content-type: application/json
+Accept: application/json
+Authorization: Bearer 4|aBumpYkcDA8Sl1QoA671RBIG4CRFqU4yCOsQGOGA
+
+{
+    "name" : ""
+}
+### detete
+DELETE  http://localhost:8000/api/category/15 HTTP/1.1
+content-type: application/json
+Accept: application/json
+Authorization: Bearer 4|aBumpYkcDA8Sl1QoA671RBIG4CRFqU4yCOsQGOGA
+
+

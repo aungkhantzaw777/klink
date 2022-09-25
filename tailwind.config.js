@@ -19,6 +19,7 @@ module.exports = {
       },
       'gray': {
         100: '#f1f5f9',
+        300: '#D0D5DD',
         500: '#667085',
         700: '#344054', 
         900: '#101828'
@@ -31,5 +32,7 @@ module.exports = {
       'darkgray': '#939DD4'
     }
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }
