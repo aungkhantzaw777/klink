@@ -1,12 +1,18 @@
+import { useContext } from "react"
 import logo1 from '../assets/logo1.png'
 import placeholder from '../assets/placeholder.png'
+import {useEffect} from 'react'
 import { CardList } from '../components/organisms/CardList'
 import { Badge } from '../components/atoms/Badge'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { ProductProp } from '../utils/interface/root'
 import { ProductList } from '../components/organisms/ProductList'
+import { getProducts } from '../api/product'
+import AuthContext from "../store/slices/auth-context"
 
 export default function Home() {
+  const authCtx = useContext(AuthContext)
+  const token = authCtx?.token
   const products : ProductProp[] = [
     {
       id: 1,
@@ -67,10 +73,15 @@ export default function Home() {
       name: 'Category6'
     },
   ]
-
+  useEffect(() => {
+    getProducts('products', {Authorization:`Bearer ${token}`}).then(r => {
+      console.log('get product is', r.data)
+    })
+  },[])
+  
   return (
     <>
-
+    
       <div className="grid grid-cols-3 h-screen grid-rows-3 ">
         <div className="col-span-2 ">
           <div className='py-4 px-4 pl-8 flex justify-between'>
@@ -97,8 +108,8 @@ export default function Home() {
           <div className='pl-8 space-x-2 overflow-x-auto'>
             <Badge classes='text-primary-25 bg-primary-600' >All</Badge>
             {
-              categories.map(cat => (
-                <Badge classes='text-black bg-gray-100' >
+              categories.map((cat,i) => (
+                <Badge key={i} classes='text-black bg-gray-100' >
                   {cat.name}
                 </Badge>
               ))
@@ -112,6 +123,8 @@ export default function Home() {
                 ))
               }
           </div>
+        
+          
         </div>
         <div className="col-span-1 row-span-3 flex flex-col justify-between border border-l-gray-100">
           <div className='flex flex-col pl-8 pr-5 justify-between'>
