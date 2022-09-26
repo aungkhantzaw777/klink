@@ -4,60 +4,76 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
-    protected function checkValidate($request) {
+    protected function checkValidate($request)
+    {
         return Validator::make(
             $request->all(),
             [
                 'name' => 'required',
-                'price' => 'required|number',
+                'price' => 'required|integer',
                 'category_id' => 'required'
             ]
         );
     }
-    public function index() {
+    public function index()
+    {
         return Product::all();
     }
-    public function show(Product $product) {
+    public function show(Product $product)
+    {
         return $product;
     }
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $checkProduct = $this->checkValidate($request);
-        if($checkProduct->fails()){
+        if ($checkProduct->fails()) {
             return response()->json([
                 'status' => false,
                 'message' => 'Validate Error',
                 'errors' => $checkProduct->errors()
             ], 400);
         }
-        Product::create([
+        $uploadedFile = $request->file('image');
+        $filename = time() . $uploadedFile->getClientOriginalName();
+
+        Storage::disk('local')->putFileAs(
+            'files/',
+            $uploadedFile,
+            $filename
+        );
+        $product = Product::create([
             'name' => $request->name,
             'price' => $request->price,
             'category_id' => $request->category_id,
-            'image' => 'https://picsum.photos/seed/picsum/200/300'
+            'image' => $filename
         ]);
+        return response()->json($product, 201);
     }
-    public function udpate(Request $request, Product $product) {
-        $checkProduct = $this->checkValidate($request);
-        if($checkProduct->fails()){
-            return response()->json([
-                'status' => false,
-                'message' => 'Validate Error',
-                'errors' => $checkProduct->errors()
-            ], 400);
+    public function update(Request $request, Product $product)
+    {
+        $newProduct = $request->all();
+        if ($request->file('image')) {
+            $uploadedFile = $request->file('image');
+            $filename = time() . $uploadedFile->getClientOriginalName();
+
+            Storage::disk('local')->putFileAs(
+                'files/' . $filename,
+                $uploadedFile,
+                $filename
+            );
+            $newProduct['image'] = $filename;
         }
-        $product::udpate([
-            'name' => $request->name,
-            'price' => $request->price,
-            'category_id' => $request->category_id,
-            'image' => $request->image
-        ]);
+        
+        $product->update($newProduct);
         return response()->json($product, 200);
     }
-    public function delete(Product $product) {
+    public function delete(Product $product)
+    {
         $product->delete();
         return response()->json(null, 204);
     }

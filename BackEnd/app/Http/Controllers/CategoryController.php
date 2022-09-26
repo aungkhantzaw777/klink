@@ -20,7 +20,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return $categories->toJson();
+        return $categories;
     }
     public function show(Category $category)
     {
@@ -44,19 +44,7 @@ class CategoryController extends Controller
         return response()->json($category, 201);
     }
     public function update(Request $request, Category $category) {
-        $validateCategory = $this->checkValidate($request);
-        
-        if($validateCategory->fails()){
-            return response()->json([
-                'status' => false,
-                'message' => 'Validate Error',
-                'errors' => $validateCategory->errors()
-            ], 400);
-        }
-
-        $category->update([
-            "name" => $request->name
-        ]);
+        $category->update($request->all());
         return response()->json($category, 200);
     }
     public function delete(Category $category)
