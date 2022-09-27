@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +23,8 @@ class ProductController extends Controller
     }
     public function index()
     {
-        return Product::all();
+        $products = ProductResource::collection(Product::all());
+        return $products;
     }
     public function show(Product $product)
     {
@@ -41,7 +43,7 @@ class ProductController extends Controller
         $uploadedFile = $request->file('image');
         $filename = time() . $uploadedFile->getClientOriginalName();
 
-        Storage::disk('local')->putFileAs(
+        Storage::disk('public')->putFileAs(
             'files/',
             $uploadedFile,
             $filename
@@ -61,7 +63,7 @@ class ProductController extends Controller
             $uploadedFile = $request->file('image');
             $filename = time() . $uploadedFile->getClientOriginalName();
 
-            Storage::disk('local')->putFileAs(
+            Storage::disk('public')->putFileAs(
                 'files/' . $filename,
                 $uploadedFile,
                 $filename

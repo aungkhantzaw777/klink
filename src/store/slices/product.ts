@@ -1,30 +1,27 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
- 
-interface productProp {
-    name:string,
-    price:number
-}
+import { ProductProp } from '../../utils/interface/root'
+
+
 type State = {
-    products : productProp[]
+    products: ProductProp[]
 }
- 
+
 const initialState: State = {
     products: []
 }
- 
+
 const productSlice = createSlice({
-    name: 'common',
+    name: 'product',
     initialState,
     reducers: {
-        setProduct(state: State, action: PayloadAction<productProp[]>){
+        setProduct(state: State, action: PayloadAction<ProductProp[]>) {
             state.products = action.payload
         }
     }
 })
- 
+
 export const {
-    setProduct, 
-    
+    setProduct,
 } = productSlice.actions
- 
+
 export default productSlice

@@ -1,23 +1,25 @@
 import { ProductProp } from '../../utils/interface/root';
 export type Props = {
-    product: ProductProp
+    product: ProductProp,
+    handleProduct: (id:number) => void
 };
 
-export const ProductList: React.FC<Props> = ({ product }) => {
+export const ProductList: React.FC<Props> = ({ product, handleProduct }) => {
     return (
         <>
             <div key={product.id} className="group relative">
-                <div className="min-h-52 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-52">
+                <div  className="min-h-52 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-52">
                     <img
-                        src={product.imageSrc}
-                        alt={product.imageAlt}
+                    onClick={() => handleProduct(product.id)}
+                        src={product.image}
+                        alt={product.name}
                         className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                     />
                 </div>
-                <div className="mt-4 flex flex-col">
+                <div onClick={() => handleProduct(product.id)} className="mt-4 flex flex-col">
                     <div>
                         <h3 className="text-sm text-gray-700">
-                            <a href={product.href}>
+                            <a href="#">
                                 <span aria-hidden="true" className="absolute inset-0" />
                                 {product.name}
                             </a>

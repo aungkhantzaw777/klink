@@ -18,4 +18,8 @@ class Product extends Model
     {
         $this->belongsToMany(Order::class, 'orders_products');
     }
+    public function ImageUrl()
+    {
+        return env('APP_URL').'/storage/files/'.$this->image;
+    }
 }
