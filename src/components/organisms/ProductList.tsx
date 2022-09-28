@@ -7,14 +7,19 @@ export type Props = {
 };
 
 export const ProductList: React.FC<Props> = ({ product, handleProduct }) => {
+    const replaceImage = (error:any) => {
+        //replacement of broken Image
+        error.target.src = placeholder; 
+    }
     return (
         <>
             <div key={product.id} className="group relative rounded-xl product-card  px-3">
                 <div  className="min-h-52 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-56">
                     <img
                     onClick={() => handleProduct(product.id)}
-                        src={product.image || placeholder }
+                        src={product.image }
                         alt={product.name}
+                        onError={replaceImage}
                         className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                     />
                 </div>

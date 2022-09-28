@@ -2,6 +2,7 @@ import React from 'react'
 import { cartItemProp } from '../../utils/interface/root';
 import { useDispatch } from 'react-redux';
 import { decreateCartItemQty, increateCartItemQty, removeCart } from '../../store/slices/cartItems';
+import placeholder from '../../assets/placeholder.png'
 
 export type Props = {
     product: cartItemProp
@@ -20,8 +21,11 @@ export const CardList: React.FC<Props> = ({ product }) => {
         let count = 1
         dispatch(decreateCartItemQty({id, count}))
     }
+    const replaceImage = (error:any) => {
+        //replacement of broken Image
+        error.target.src = placeholder; 
+    }
     return (
-    
     
         <>
             <li className="flex py-6">
@@ -29,6 +33,7 @@ export const CardList: React.FC<Props> = ({ product }) => {
                     <img
                         src={product.image}
                         alt={product.name}
+                        onError={replaceImage}
                         className="h-full w-full object-cover object-center"
                     />
                 </div>
