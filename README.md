@@ -1,6 +1,28 @@
 # Getting Started Mini POS
 
 This project has two part front end part and backend part in the root directory there is front and and other related file. 
+## Start Back end with laravel
+```
+cd BackEnd
+```
+### modify .env file
+
+```
+APP_URL={yourdomain}
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=klink
+DB_USERNAME=root
+DB_PASSWORD=password
+```
+### migrate database
+```
+php artisan migrate
+```
+### import postman colleciton local
+![postmanCollection](https://user-images.githubusercontent.com/39464677/192869528-564cc9cf-4b8f-4378-9c60-b75214fab026.PNG)
 
 ## Front End
 
