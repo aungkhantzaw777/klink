@@ -1,6 +1,5 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import logo1 from '../assets/logo1.png'
-import placeholder from '../assets/placeholder.png'
 import { useEffect } from 'react'
 import { CardList } from '../components/organisms/CardList'
 import { Badge } from '../components/atoms/Badge'

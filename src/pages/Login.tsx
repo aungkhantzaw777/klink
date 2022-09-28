@@ -4,7 +4,7 @@ import { StarIcon } from '@heroicons/react/24/solid'
 import AuthContext from '../store/slices/auth-context'
 import { useNavigate } from 'react-router-dom'
 import { SyntheticEvent, useContext, useRef } from 'react'
-import { login as loginProp, sendLogin } from '../api/login'
+import { sendLogin } from '../api/login'
 
 export default function Login() {
   const stars = [
