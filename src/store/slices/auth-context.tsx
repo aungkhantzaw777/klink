@@ -19,7 +19,7 @@ const AuthContext = React.createContext<ContextProps | null>({
 
 
 const retrieveStoredToken = () => {
-  const storedToken = localStorage.getItem('token');
+  const storedToken = sessionStorage.getItem('token');
   return {
     token: storedToken,
   };
@@ -39,15 +39,15 @@ export const AuthContextProvider :React.FC<Props> = (prop) => {
 
   const logoutHandler = useCallback(() => {
     setToken(null);
-    localStorage.removeItem('token');
-    localStorage.removeItem('expirationTime');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('expirationTime');
 
     
   }, []);
 
   const loginHandler = (token:string) => {
     setToken(token);
-    localStorage.setItem('token', token);
+    sessionStorage.setItem('token', token);
     console.log('logggin', token) 
   };
 

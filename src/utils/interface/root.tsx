@@ -23,3 +23,10 @@ export interface order {
     tax: number
     products: orderProductProp []
 }
+
+export interface CategoryProp {
+    id:number
+    name:string
+    created_at?:string
+    updated_at?:string
+}
