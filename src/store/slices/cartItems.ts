@@ -21,6 +21,9 @@ const cartSlice = createSlice({
         removeCart(state: State, action: PayloadAction<{ id: number }>) {
             state.cartItems = state.cartItems.filter(item => item.id !== action.payload.id)
         },
+        clearCart(state: State) {
+            state.cartItems = []
+        },
         increateCartItemQty(state: State, action: PayloadAction<{ id: number, count: number }>) {
 
             state.cartItems = state.cartItems.map(item => {
@@ -50,6 +53,7 @@ export const {
     removeCart,
     increateCartItemQty,
     decreateCartItemQty,
+    clearCart
 } = cartSlice.actions
 
 export default cartSlice

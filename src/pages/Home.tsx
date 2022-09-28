@@ -13,7 +13,7 @@ import { CategoryProp } from "../utils/interface/root"
 
 // redux
 import { setProduct } from '../store/slices/product'
-import { setCartItems } from '../store/slices/cartItems'
+import { setCartItems, clearCart } from '../store/slices/cartItems'
 import { setCategory } from "../store/slices/category"
 import { useDispatch, useSelector } from "react-redux"
 import { AppState } from '../store'
@@ -106,11 +106,12 @@ export default function Home() {
     }
     await postOrder({ url: 'orders', data, headers: { Authorization: `Bearer ${token}` } }).then(r => {
       console.log(r)
-      dispatch(setCartItems([]))
+      
     }).catch(e => {
       console.log(e.message)
     }).finally(() => {
       console.log('process complete')
+      dispatch(clearCart())
     })
   }
 
