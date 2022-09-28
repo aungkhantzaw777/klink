@@ -5,7 +5,7 @@ let base_api_url : any = ""
 if(window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ){
     base_api_url = process.env.REACT_APP_API_URL
 }else {
-    base_api_url = process.env.REACT_APP_API_URL
+    base_api_url = process.env.REACT_APP_HOST_URL
 }
 
 let defaultHeaderOptions = {
