@@ -106,6 +106,7 @@ export default function Home() {
     }
     await postOrder({ url: 'orders', data, headers: { Authorization: `Bearer ${token}` } }).then(r => {
       console.log(r)
+      dispatch(setCartItems([]))
     }).catch(e => {
       console.log(e.message)
     }).finally(() => {
