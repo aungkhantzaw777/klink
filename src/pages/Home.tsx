@@ -124,7 +124,7 @@ export default function Home() {
             <div><img src={logo1} alt="klink" /></div>
 
 
-            <div className="relative mt-1 flex items-center w-60">
+            <div className="relative mt-1 flex items-center search-input-width">
               <input
                 type="text"
                 name="search"
